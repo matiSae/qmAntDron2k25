@@ -1,0 +1,41 @@
+2026-01-09 13:01:24 | undefined.main -> test
+2026-01-09 13:01:24 | SexoDAO.DataHelperSQLiteDAO -> path to 'src\InfrastructureComponent\Databases\ant.sqlite': 'C:\pat_mic\oneDriveEPN\OneDrive - Escuela Politécnica Nacional\class\PROG_II\Code\wsAntDron\src\InfrastructureComponent\Databases' does not exist
+[PatException | undefined.main | 2026-01-09 13:05:30 ]  ❱ test
+[PatException | SexoDAO.DataHelperSQLiteDAO | 2026-01-09 13:05:30 ]  ❱ path to 'src\InfrastructureComponent\Databases\ant.sqlite': 'C:\pat_mic\oneDriveEPN\OneDrive - Escuela Politécnica Nacional\class\PROG_II\Code\wsAntDron\src\InfrastructureComponent\Databases' does not exist
+[PatException | undefined.main | 2026-01-09 13:06:36 ]  ❱ test
+[PatException | SexoDAO.DataHelperSQLiteDAO | 2026-01-09 13:06:36 ]  ❱ path to 'src\InfrastructureComponent\Databases\ant.sqlite': 'C:\pat_mic\oneDriveEPN\OneDrive - Escuela Politécnica Nacional\class\PROG_II\Code\wsAntDron\src\InfrastructureComponent\Databases' does not exist
+[PatException | undefined.main | 2026-01-09 13:08:17 ]  ❱ test
+[PatException | SexoDAO.DataHelperSQLiteDAO | 2026-01-09 13:08:18 ]  ❱ path to 'src\InfrastructureComponent\Databases\ant.sqlite': 'C:\pat_mic\oneDriveEPN\OneDrive - Escuela Politécnica Nacional\class\PROG_II\Code\wsAntDron\src\InfrastructureComponent\Databases' does not exist
+[PatException | undefined.main | 2026-01-09 13:08:41 ]  ❱ test
+[PatException | SexoDAO.DataHelperSQLiteDAO | 2026-01-09 13:08:41 ]  ❱ path to 'src\InfrastructureComponent\Databases\ant.sqlite': 'C:\pat_mic\oneDriveEPN\OneDrive - Escuela Politécnica Nacional\class\PROG_II\Code\wsAntDron\src\InfrastructureComponent\Databases' does not exist
+[ PatException | undefined.main | 2026-01-09 15:01:44 ]  ❱ error en clase
+╭─💀─ SHOW ❱❱ Error al dividir por cero 
+╰──── LOG  ❱❱ 2026-01-14 09:28:23 | undefined.main(...) | / by zero
+╭─💀─ SHOW ❱❱ Error al dividir por cero 
+╰──── LOG  ❱❱ 2026-01-14 09:29:16 | undefined.main(...) | / by zero
+╭─💀─ SHOW ❱❱ Error al dividir por cero 
+╰──── LOG  ❱❱ 2026-01-14 09:29:29 | undefined.main(...) | / by zero
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 10:09:07 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 10:09:19 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 10:10:04 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 10:13:36 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 10:15:32 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 14:07:56 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 14:08:39 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 14:10:10 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 16:27:40 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: AlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 16:29:58 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: qmAlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 16:42:53 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: qmAlimentoTipo)
+╭─💀─ SHOW ❱❱ Ups! Error inesperado. Por favor, contacte al administrador del sistema. 
+╰──── LOG  ❱❱ 2026-01-14 16:58:25 | qmAlimentoTipoDAO.readAll | [SQLITE_ERROR] SQL error or missing database (no such table: qmAlimentoTipo)
