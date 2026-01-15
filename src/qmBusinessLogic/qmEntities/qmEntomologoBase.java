@@ -1,4 +1,4 @@
-package qmApp.qmConsoleApp;
+package qmBusinessLogic.qmEntities;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,8 +6,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import qmBusinessLogic.qmEntities.qmHLarva;
-import qmBusinessLogic.qmEntities.qmHormiga;
 import qmBusinessLogic.qmInterface.qm_IEntomologo;
 import qmDataAccess.qm_DAOs.qmAlimentoTipoDAO;
 import qmDataAccess.qm_DAOs.qmHormigaDAO;
@@ -16,39 +14,56 @@ import qmDataAccess.qm_DTOs.qmHormigaDTO;
 import qmInfrastructure.AppException;
 import qmInfrastructure.Tools.qmCMDColor;
 
-public abstract class qmEntomologo implements qm_IEntomologo {
+public abstract class qmEntomologoBase implements qm_IEntomologo {
 
     protected static final String RUTA_ANT_NEST = "storage/DataFiles/AntNest.txt";
     protected static final String RUTA_ANT_FOOD = "storage/DataFiles/AntFood.txt";
 
-    public qmEntomologo() {
+    public qmEntomologoBase() {
     }
 
-    /**
-     * Animación de loading para hormigas: \|/-
-     */
-    private void mostrarLoadingHormiga(String texto) {
+    protected void mostrarLoadingHormiga(String texto) {
         String[] spinner = {"\\", "|", "/", "-"};
         for (int i = 0; i < 4; i++) {
             System.out.print(qmCMDColor.BLUE + "[" + spinner[i] + "] " + texto + "..." + qmCMDColor.RESET);
             try {
-                Thread.sleep(100);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
             System.out.print("\r");
         }
     }
-
-    /**
-     * Animación de loading para alimentos: o0o
-     */
-    private void mostrarLoadingAlimento(String texto) {
-        String[] spinner = {"o", "0", "o"};
-        for (int i = 0; i < 3; i++) {
+    protected void mostrarLoadingHormiga() {
+        String[] spinner = {"\\", "|", "/", "-"};
+        for (int i = 0; i < 4; i++) {
+            System.out.print(qmCMDColor.BLUE + "[" + spinner[i] + "] " + "..." + qmCMDColor.RESET);
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print("\r");
+        }
+    }
+    protected void mostrarLoadingAlimento() {
+        String[] spinner = {"0o0", "o0o", "0o0", "o0o"};
+        for (int i = 0; i < 4; i++) {
+            System.out.print(qmCMDColor.BLUE + "[" + spinner[i] + "] " + "..." + qmCMDColor.RESET);
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.print("\r");
+        }
+    }
+    protected void mostrarLoadingAlimento(String texto) {
+        String[] spinner = {"0o0", "o0o", "0o0", "o0o"};
+        for (int i = 0; i < 4; i++) {
             System.out.print(qmCMDColor.BLUE + "[" + spinner[i] + "] " + texto + "..." + qmCMDColor.RESET);
             try {
-                Thread.sleep(100);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -56,7 +71,6 @@ public abstract class qmEntomologo implements qm_IEntomologo {
         }
     }
 
-    /**
     @Override
     public List<qmHormiga> etlAntNest() throws AppException {
         List<qmHormiga> lstHormigas = new ArrayList<>();
@@ -65,6 +79,24 @@ public abstract class qmEntomologo implements qm_IEntomologo {
         java.util.Set<String> existentes = new java.util.HashSet<>();
         
         try {
+            System.out.println(qmCMDColor.BLUE + "\n╔════════════════════════════════════════╗" + qmCMDColor.RESET);
+            System.out.println(qmCMDColor.BLUE + "║  CARGANDO HORMIGAS (CASO ESTUDIO)     ║" + qmCMDColor.RESET);
+            System.out.println(qmCMDColor.BLUE + "╚════════════════════════════════════════╝" + qmCMDColor.RESET);
+            
+            try {
+                System.out.print(qmCMDColor.BLUE + "[\\] ");
+                Thread.sleep(200);
+                System.out.print("\r[|] ");
+                Thread.sleep(200);
+                System.out.print("\r[/] ");
+                Thread.sleep(200);
+                System.out.print("\r[-] ");
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.println("\r[✓] Iniciando ETL de Hormigas..." + qmCMDColor.RESET);
+            
             // Cargar nombres de hormigas ya existentes en BD
             for (qmHormigaDTO dto : hormigaDAO.readAll()) {
                 if (dto.getNombre() != null) {
@@ -73,7 +105,7 @@ public abstract class qmEntomologo implements qm_IEntomologo {
             }
             
             List<String> allLines = Files.readAllLines(Paths.get(RUTA_ANT_NEST));
-            System.out.println(qmCMDColor.BLUE + "\n[ETL-AntNest] Iniciando carga de hormigas (Caso de Estudio: Cédula 02 - HSoldado)..." + qmCMDColor.RESET);
+            System.out.println(qmCMDColor.BLUE + "[ETL-AntNest] Buscando HSoldado en archivo..." + qmCMDColor.RESET);
             
             for (String line : allLines) {
                 if (line.trim().isEmpty()) continue;
@@ -100,17 +132,21 @@ public abstract class qmEntomologo implements qm_IEntomologo {
                                     hormiga.setIdEstado(1);
                                     
                                     if (hormigaDAO.create(hormiga)) {
-                                        System.out.println(qmCMDColor.GREEN + "[\\/] " + tipoLimpio + "... ✓ VÁLIDO" + qmCMDColor.RESET);
+                                        mostrarLoadingHormiga();
+                                        System.out.println(qmCMDColor.GREEN + tipoLimpio + " ✓ VÁLIDO" + qmCMDColor.RESET);
+                                        
                                     } else {
-                                        System.out.println(qmCMDColor.RED + "[\\/] " + tipoLimpio + "... ✗ FALLÓ" + qmCMDColor.RESET);
+                                        mostrarLoadingHormiga();
+                                        System.out.println(qmCMDColor.RED + "[\\|] " + tipoLimpio + " ✗ FALLÓ" + qmCMDColor.RESET);
                                     }
                                 } catch (Exception e) {
-                                    System.out.println(qmCMDColor.RED + "[\\/] " + tipoLimpio + "... ✗ ERROR: " + e.getMessage() + qmCMDColor.RESET);
+                                    System.out.println(qmCMDColor.RED + "[\\|] " + tipoLimpio + " ✗ ERROR: " + e.getMessage() + qmCMDColor.RESET);
                                 }
                             }
                         } else {
                             // Rechazar hormigas que NO son HSoldado
-                            System.out.println(qmCMDColor.RED + "[RECHAZADO] " + tipoLimpio + " - Solo se cargan HSoldado para Cédula 02" + qmCMDColor.RESET);
+                            mostrarLoadingHormiga();
+                            System.out.println(qmCMDColor.RED + "[\\|] " + tipoLimpio + " [RECHAZADO]" + qmCMDColor.RESET);
                         }
                     }
                 }
@@ -127,10 +163,6 @@ public abstract class qmEntomologo implements qm_IEntomologo {
         return lstHormigas;
     }
 
-    /**
-     * ETL: Extract-Transform-Load de Alimentos desde AntFood.txt
-     * Lee tipos de alimentos del archivo y carga en base de datos
-     */
     @Override
     public List<qmAlimentoTipoDTO> etlAntFood() throws AppException {
         List<qmAlimentoTipoDTO> lstAlimentos = new ArrayList<>();
@@ -139,6 +171,22 @@ public abstract class qmEntomologo implements qm_IEntomologo {
         java.util.Set<String> existentes = new java.util.HashSet<>();
         
         try {
+            System.out.println(qmCMDColor.BLUE + "\n╔════════════════════════════════════════╗" + qmCMDColor.RESET);
+            System.out.println(qmCMDColor.BLUE + "║  CARGANDO ALIMENTOS (CASO ESTUDIO)    ║" + qmCMDColor.RESET);
+            System.out.println(qmCMDColor.BLUE + "╚════════════════════════════════════════╝" + qmCMDColor.RESET);
+            
+            try {
+                System.out.print(qmCMDColor.BLUE + "[o] ");
+                Thread.sleep(200);
+                System.out.print("\r[0] ");
+                Thread.sleep(200);
+                System.out.print("\r[o] ");
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.println("\r[✓] Iniciando ETL de Alimentos..." + qmCMDColor.RESET);
+            
             // Cargar nombres de alimentos ya existentes en BD
             for (qmAlimentoTipoDTO dto : alimentoDAO.readAll()) {
                 if (dto.getNombre() != null) {
@@ -147,7 +195,7 @@ public abstract class qmEntomologo implements qm_IEntomologo {
             }
             
             List<String> allLines = Files.readAllLines(Paths.get(RUTA_ANT_FOOD));
-            System.out.println(qmCMDColor.BLUE + "\n[ETL-AntFood] Iniciando carga de alimentos (Caso de Estudio: Carnívoro para HSoldado)..." + qmCMDColor.RESET);
+            System.out.println(qmCMDColor.BLUE + "[ETL-AntFood] Buscando Carnívoro en archivo..." + qmCMDColor.RESET);
             
             // CASO DE ESTUDIO: Solo cargar Carnívoro para HSoldado
             String[] alimentosValidos = { "Carnívoro" };
@@ -184,19 +232,22 @@ public abstract class qmEntomologo implements qm_IEntomologo {
                                 alimento.setEstado("A");
                                 
                                 if (alimentoDAO.create(alimento)) {
-                                    System.out.println(qmCMDColor.GREEN + "[o0o] " + itemLimpio + " ✓ VÁLIDO" + qmCMDColor.RESET);
+                                    mostrarLoadingAlimento();
+                                    System.out.println(qmCMDColor.GREEN + "[0o0] " + itemLimpio + " ✓ VÁLIDO" + qmCMDColor.RESET);
                                     lstAlimentos.add(alimento);
                                 } else {
-                                    System.out.println(qmCMDColor.RED + "[o0o] " + itemLimpio + " ✗ FALLÓ" + qmCMDColor.RESET);
+                                    mostrarLoadingAlimento();
+                                    System.out.println(qmCMDColor.RED + "[0o0] " + itemLimpio + " ✗ FALLÓ" + qmCMDColor.RESET);
                                 }
                             } catch (Exception e) {
-                                System.out.println(qmCMDColor.RED + "[o0o] " + itemLimpio + " ✗ ERROR: " + e.getMessage() + qmCMDColor.RESET);
+                                System.out.println(qmCMDColor.RED + "[0o0] " + itemLimpio + " ✗ ERROR: " + e.getMessage() + qmCMDColor.RESET);
                             }
                         }
                     } else if (!esValido && !procesados.contains(itemLimpio.toLowerCase())) {
+                        mostrarLoadingAlimento();
                         // Rechazar alimentos que NO son válidos para el caso de estudio
                         procesados.add(itemLimpio.toLowerCase());
-                        System.out.println(qmCMDColor.RED + "[RECHAZADO] " + itemLimpio + " - Solo se carga Carnívoro para Cédula 02" + qmCMDColor.RESET);
+                        System.out.println(qmCMDColor.RED + "[0o0] " + itemLimpio + " [RECHAZADO]" + qmCMDColor.RESET);
                     }
                 }
             }
@@ -212,28 +263,14 @@ public abstract class qmEntomologo implements qm_IEntomologo {
         return lstAlimentos;
     }
 
-    /**
-     * Preparar alimento sin genoma (Entomólogo Normal)
-     * Imprime: "[Preparado]-`tipoAlimento`-"
-     */
     @Override
     public qmAlimentoTipoDTO preparar(qmAlimentoTipoDTO alimento) {
-        System.out.println(qmCMDColor.BLUE + "[Preparado]-`" + alimento.getNombre() + "`-" + qmCMDColor.RESET);
+        System.out.println(qmCMDColor.BLUE + "[Preparado]-( " + alimento.getNombre() + " )-" + qmCMDColor.RESET);
         return alimento;
     }
 
-    /**
-     * Alimentar hormiga con alimento
-     * REQ02: Elimina el alimento de la BD después del consumo
-     * La hormiga vive si come su alimento, muere si no
-     */
     @Override
     public qmHormiga alimentarAnt(qmHormiga hormiga, qmAlimentoTipoDTO alimento) throws AppException {
-        // Validar que sea ejecutado solo por entomólogo o genetista
-        if (!(this instanceof qmEntomologo)) {
-            throw new AppException(null, null, getClass(), "alimentarAnt: Solo el entomólogo puede alimentar");
-        }
-        
         // Alimentar la hormiga
         System.out.println("[Alimentando] " + hormiga.data.getNombre() + " con " + alimento.getNombre());
         
@@ -254,9 +291,6 @@ public abstract class qmEntomologo implements qm_IEntomologo {
         return hormigaResultado;
     }
 
-    /**
-     * Convertir DTOs a Entidades de Hormiga
-     */
     protected List<qmHormiga> convertDTOsToEntities(List<qmHormigaDTO> dtos) {
         List<qmHormiga> hormigas = new ArrayList<>();
         for (qmHormigaDTO dto : dtos) {
