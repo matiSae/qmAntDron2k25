@@ -2,25 +2,13 @@ package qmBusinessLogic.qmEntities;
 
 import qmInfrastructure.AppException;
 
-/**
- * HSoldado - Caso de Estudio: Cédula terminada en 02
- * SuperHabilidad: "superSaltar" activada SOLO cuando:
- * - Come Carnívoro Y
- * - Tiene genoma XX
- * REQ03: Puede cambiar de sexo acorde al genoma (XX = Hombre)
- */
+
 public class qmHSoldado extends qmHormiga {
     
     private qmGenoAlimento genoma = null; // Genoma inyectado
     private boolean superSaltar = false; // SuperHabilidad
 
-    /**
-     * HSoldado come Carnívoro
-     * Si come Carnívoro + genoma XX: Vive y activa superSaltar
-     * Si come Carnívoro sin genoma: Vive pero sin superhabilidad
-     * Si no come Carnívoro: Muere
-     * El alimento es eliminado de la BD
-     */
+
     @Override
     public qmHormiga comer(String tipoAlimento) throws AppException {
         if (tipoAlimento.equalsIgnoreCase("Carnívoro")) {
@@ -39,10 +27,7 @@ public class qmHSoldado extends qmHormiga {
         return this;
     }
 
-    /**
-     * Activar SuperHabilidad: superSaltar
-     * Solo se activa cuando genoma es XX
-     */
+    //refactorizado
     public void activarSuperSaltar() {
         this.superSaltar = true;
         System.out.println("[HSoldado] ⚡ SuperHabilidad ACTIVADA: superSaltar (Genoma XX)");
@@ -60,8 +45,8 @@ public class qmHSoldado extends qmHormiga {
     }
 
     /**
-     * Inyectar genoma (usado por EntomologoGen)
-     */
+     * refactorizado
+     * */
     public void inyectarGenoma(qmGenoAlimento genoma) {
         this.genoma = genoma;
         System.out.println("[HSoldado] Genoma inyectado: " + genoma.getTipoGenoma());

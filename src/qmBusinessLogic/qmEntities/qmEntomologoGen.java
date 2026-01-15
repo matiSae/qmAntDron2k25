@@ -42,7 +42,7 @@ public class qmEntomologoGen extends qmEntomologoBase {
             System.out.println(qmCMDColor.YELLOW + "[EntomologoGen]  Genoma XX inyectado - SuperSaltar se activará si se transforma en HSoldado" + qmCMDColor.RESET);
         }
     }
-
+//refactorizado
     public void inyectarGenomaEnSoldado(qmHSoldado soldado, String tipoGenoma) {
         qmGenoAlimento genoma = obtenerGenoma(tipoGenoma);
         soldado.inyectarGenoma(genoma);
@@ -53,7 +53,7 @@ public class qmEntomologoGen extends qmEntomologoBase {
             soldado.activarSuperSaltar();
         }
     }
-
+//refactorizado
     public qmGenoAlimento obtenerGenoma(String tipo) {
         switch (tipo.toUpperCase()) {
             case "X":

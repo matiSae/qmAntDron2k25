@@ -11,18 +11,10 @@ public abstract class qmHormiga {
     protected qmFactoryBL<qmHormigaDTO> factory = new qmFactoryBL<>(qmHormigaDAO.class);
     public qmHormigaDTO data = new qmHormigaDTO();
 
-    /**
-     * La hormiga come su alimento
-     * Si come su alimento vive, si no muere
-     * El alimento es eliminado de la BD después de consumirlo
-     * Usa data.Estado para persistencia en BD
-     */
+
     public abstract qmHormiga comer(String tipoAlimento) throws AppException;
 
-    /**
-     * Alimentar la hormiga con alimento del DTO
-     * Retorna la hormiga alimentada o transformada
-     */
+
     public qmHormiga alimentarse(qmAlimentoTipoDTO alimento) throws AppException {
         if (alimento == null) {
             setViva(false);
@@ -30,10 +22,7 @@ public abstract class qmHormiga {
         }
         return comer(alimento.getNombre());
     }
-
-    /**
-     * Eliminar alimento de la base de datos
-     */
+//refactorizado
     protected void eliminarAlimentoDeBD(qmAlimentoTipoDTO alimento) throws AppException {
         try {
             qmAlimentoTipoDAO alimentoDAO = new qmAlimentoTipoDAO();
@@ -46,18 +35,11 @@ public abstract class qmHormiga {
         }
     }
 
-    /**
-     * Obtener estado de vida de la hormiga
-     * Usa data.Estado de la BD (A=Activa/Viva, X=Inactiva/Muerta)
-     */
     public boolean estaViva() {
         return data.getEstado() != null && data.getEstado().equalsIgnoreCase("A");
     }
 
-    /**
-     * Establecer estado de vida de la hormiga
-     * Viva = "A", Muerta = "X"
-     */
+
     public void setViva(boolean viva) {
         if (viva) {
             data.setEstado("A");
@@ -66,25 +48,16 @@ public abstract class qmHormiga {
         }
     }
 
-    /**
-     * Obtener sexo de la hormiga
-     * Usa data.IdSexo (FK a tabla Sexo en BD)
-     */
+
     public Integer getIdSexo() {
         return data.getIdSexo();
     }
 
-    /**
-     * Establecer sexo de la hormiga
-     * IdSexo: FK a tabla de Sexos en BD
-     */
+    
     public void setIdSexo(Integer idSexo) {
         data.setIdSexo(idSexo);
     }
 
-    /**
-     * Obtener descripción del sexo desde el DTO
-     */
     public String getDescripcionSexo() {
         Integer idSexo = data.getIdSexo();
         if (idSexo == null) {

@@ -121,7 +121,6 @@ public class App {
             }
             
             try {
-                System.out.println("\n PRUEBA 4.1: HSoldado con Genoma XX activa SuperSaltar");
                 qmHLarva larva4 = new qmHLarva();
                 qmHormigaDTO dto4 = new qmHormigaDTO();
                 dto4.setNombre("Larva_SuperSaltar");
